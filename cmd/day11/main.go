@@ -4,13 +4,13 @@ import (
 	"fmt"
 
 	"github.com/frodejac/aoc-2022/internal/aoc"
-	"github.com/frodejac/aoc-2022/internal/input"
+	"github.com/frodejac/aoc-2022/internal/io"
 )
 
 const DAY = 11
 
 func main() {
-	data, err := input.GetInput(DAY)
+	data, err := io.GetInput(DAY)
 	if err != nil {
 		panic(err)
 	}

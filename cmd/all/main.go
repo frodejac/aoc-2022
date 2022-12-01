@@ -4,12 +4,12 @@ import (
 	"fmt"
 
 	"github.com/frodejac/aoc-2022/internal/aoc"
-	"github.com/frodejac/aoc-2022/internal/input"
+	"github.com/frodejac/aoc-2022/internal/io"
 )
 
 func main() {
 	for day := 0; day < 24; day++ {
-		data, err := input.GetInput(day)
+		data, err := io.GetInput(day)
 		if err != nil {
 			fmt.Printf("Day %02d: Failed to get input data, skipping...\n", day)
 			continue
