@@ -50,3 +50,5 @@ day24:
 	go run ./cmd/day24
 all:
 	go run ./cmd/all
+test:
+	go test ./internal/... ./pkg/...
