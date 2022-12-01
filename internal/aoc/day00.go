@@ -1,8 +1,11 @@
 package aoc
 
 import (
+	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/frodejac/aoc-2022/pkg/arraytools"
 )
 
 type Day00 Day
@@ -28,44 +31,31 @@ func parseInput(input string) []elf {
 	return elves
 }
 
-func sumArray(array []int) int {
-	sum := 0
-	for _, value := range array {
-		sum += value
-	}
-	return sum
-}
-
 func (d Day00) SolvePart1() string {
 	elves := parseInput(string(d.input))
-	max := 0
-	for _, elf := range elves {
-		sum := sumArray(elf.inventory)
-		if sum > max {
-			max = sum
-		}
-	}
-	return strconv.Itoa(max)
-}
 
-func sortElves(elves []elf) []elf {
-	for i := 0; i < len(elves); i++ {
-		for j := i + 1; j < len(elves); j++ {
-			if sumArray(elves[i].inventory) < sumArray(elves[j].inventory) {
-				elves[i], elves[j] = elves[j], elves[i]
-			}
-		}
+	inventories := make([]int, len(elves))
+	for i, elf := range elves {
+		inventories[i] = arraytools.Sum(elf.inventory)
 	}
-	return elves
+	max := arraytools.Max(inventories)
+
+	return strconv.Itoa(max)
 }
 
 func (d Day00) SolvePart2() string {
 	elves := parseInput(string(d.input))
-	elves = sortElves(elves)
-	total := 0
-	for i := 0; i < len(elves[:3]); i++ {
-		total += sumArray(elves[i].inventory)
+
+	inventories := make([]int, len(elves))
+	for i, elf := range elves {
+		inventories[i] = arraytools.Sum(elf.inventory)
 	}
+	sort.Slice(inventories[:], func(i, j int) bool {
+		return inventories[i] > inventories[j]
+	})
+
+	total := arraytools.Sum(inventories[:3])
+
 	return strconv.Itoa(total)
 
 }
