@@ -4,6 +4,8 @@ My go (get it?) at [Advent of Code 2022](https://adventofcode.com/2022).
 
 ## How to run
 
+Requires Go 1.19 to be installed on your system.
+
 Makefile should do all the heavy lifting. If you want to build and run everything, just do `make all`.
 
 Run a specific puzzle solution:
