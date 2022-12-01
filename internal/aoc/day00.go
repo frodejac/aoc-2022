@@ -15,6 +15,7 @@ type elf struct {
 }
 
 func parseInput(input string) []elf {
+	input = strings.TrimSpace(input)
 	inputs := strings.Split(input, "\n\n")
 	elves := make([]elf, len(inputs))
 	for i, input := range inputs {

@@ -52,3 +52,5 @@ all:
 	go run ./cmd/all
 test:
 	go test ./internal/... ./pkg/...
+clean:
+	rm -f assets/day*/input.txt
