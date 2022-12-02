@@ -14,7 +14,7 @@ type elf struct {
 	inventory []int
 }
 
-func parseInput(input string) []elf {
+func parseDay00Input(input string) []elf {
 	input = strings.TrimSpace(input)
 	inputs := strings.Split(input, "\n\n")
 	elves := make([]elf, len(inputs))
@@ -32,8 +32,8 @@ func parseInput(input string) []elf {
 	return elves
 }
 
-func (d Day00) SolvePart1() string {
-	elves := parseInput(string(d.input))
+func (d *Day00) SolvePart1() string {
+	elves := parseDay00Input(string(d.input))
 
 	inventories := make([]int, len(elves))
 	for i, elf := range elves {
@@ -44,8 +44,8 @@ func (d Day00) SolvePart1() string {
 	return strconv.Itoa(max)
 }
 
-func (d Day00) SolvePart2() string {
-	elves := parseInput(string(d.input))
+func (d *Day00) SolvePart2() string {
+	elves := parseDay00Input(string(d.input))
 
 	inventories := make([]int, len(elves))
 	for i, elf := range elves {
