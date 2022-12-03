@@ -87,7 +87,7 @@ func parseDay02Input(input string) []rucksack {
 	return rucksacks
 }
 
-func findDuplicates(r rucksack) string {
+func findDuplicate(r rucksack) string {
 	for a := range r.compartment1 {
 		for b := range r.compartment2 {
 			if a == b {
@@ -100,27 +100,26 @@ func findDuplicates(r rucksack) string {
 
 func (d *Day02) SolvePart1() string {
 	rucksacks := parseDay02Input(string(d.input))
-	duplicates := make([]string, len(rucksacks))
+
 	total := 0
-	for i := 0; i < len(rucksacks); i++ {
-		duplicates[i] = findDuplicates(rucksacks[i])
-		total += prorities[duplicates[i]]
+	for _, r := range rucksacks {
+		commonItem := findDuplicate(r)
+		total += prorities[commonItem]
 	}
 	return strconv.Itoa(total)
 }
 
 func findGroupBadge(group []rucksack) string {
-	g := make([][]string, len(group))
-	for i := 0; i < len(group); i++ {
-		r := maptools.Merge(group[i].compartment1, group[i].compartment2)
-		g[i] = maptools.Keys(r)
+	r := maptools.Merge(group[0].compartment1, group[0].compartment2)
+	intersection := maptools.Keys(r)
+
+	for _, g := range group[1:] {
+		r := maptools.Merge(g.compartment1, g.compartment2)
+		intersection = arraytools.Intersect(intersection, maptools.Keys(r))
 	}
 
-	i := arraytools.Intersect(g[0], g[1])
-	i = arraytools.Intersect(i, g[2])
-
-	if len(i) == 1 {
-		return i[0]
+	if len(intersection) == 1 {
+		return intersection[0]
 	}
 
 	return ""
@@ -128,9 +127,10 @@ func findGroupBadge(group []rucksack) string {
 
 func (d *Day02) SolvePart2() string {
 	rucksacks := parseDay02Input(string(d.input))
+	groupSize := 3
 	total := 0
-	for i := 0; i < len(rucksacks); i += 3 {
-		group := rucksacks[i : i+3]
+	for i := 0; i < len(rucksacks); i += groupSize {
+		group := rucksacks[i : i+groupSize]
 		badge := findGroupBadge(group)
 		total += prorities[badge]
 	}
