@@ -1,6 +1,7 @@
 package arraytools
 
 import (
+	"github.com/frodejac/aoc-2022/pkg/math"
 	"golang.org/x/exp/constraints"
 )
 
@@ -24,4 +25,16 @@ func Max[T Number](array []T) T {
 		}
 	}
 	return max
+}
+
+func Intersect[T comparable](as, bs []T) []T {
+	i := make([]T, 0, math.Max(len(as), len(bs)))
+	for _, a := range as {
+		for _, b := range bs {
+			if a == b {
+				i = append(i, a)
+			}
+		}
+	}
+	return i
 }

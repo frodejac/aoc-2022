@@ -50,7 +50,9 @@ day24:
 	go run ./cmd/day24
 all:
 	go run ./cmd/all
+build:
+	go build -v ./...
 test:
-	go test ./internal/... ./pkg/...
+	go test -v ./...
 clean:
 	rm -f assets/day*/input.txt

@@ -17,3 +17,12 @@ func TestMax(t *testing.T) {
 		t.Errorf("Expected max to be 5, got %d", max)
 	}
 }
+
+func TestIntersect(t *testing.T) {
+	a := []int{1, 2, 3, 4, 5}
+	b := []int{3, 4, 5, 6, 7}
+	intersection := Intersect(a, b)
+	if len(intersection) != 3 {
+		t.Errorf("Expected intersection to be [3, 4, 5], got %v", intersection)
+	}
+}
