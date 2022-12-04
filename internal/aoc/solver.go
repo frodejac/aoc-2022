@@ -1,5 +1,33 @@
 package aoc
 
+import (
+	"github.com/frodejac/aoc-2022/internal/aoc/day00"
+	"github.com/frodejac/aoc-2022/internal/aoc/day01"
+	"github.com/frodejac/aoc-2022/internal/aoc/day02"
+	"github.com/frodejac/aoc-2022/internal/aoc/day03"
+	"github.com/frodejac/aoc-2022/internal/aoc/day04"
+	"github.com/frodejac/aoc-2022/internal/aoc/day05"
+	"github.com/frodejac/aoc-2022/internal/aoc/day06"
+	"github.com/frodejac/aoc-2022/internal/aoc/day07"
+	"github.com/frodejac/aoc-2022/internal/aoc/day08"
+	"github.com/frodejac/aoc-2022/internal/aoc/day09"
+	"github.com/frodejac/aoc-2022/internal/aoc/day10"
+	"github.com/frodejac/aoc-2022/internal/aoc/day11"
+	"github.com/frodejac/aoc-2022/internal/aoc/day12"
+	"github.com/frodejac/aoc-2022/internal/aoc/day13"
+	"github.com/frodejac/aoc-2022/internal/aoc/day14"
+	"github.com/frodejac/aoc-2022/internal/aoc/day15"
+	"github.com/frodejac/aoc-2022/internal/aoc/day16"
+	"github.com/frodejac/aoc-2022/internal/aoc/day17"
+	"github.com/frodejac/aoc-2022/internal/aoc/day18"
+	"github.com/frodejac/aoc-2022/internal/aoc/day19"
+	"github.com/frodejac/aoc-2022/internal/aoc/day20"
+	"github.com/frodejac/aoc-2022/internal/aoc/day21"
+	"github.com/frodejac/aoc-2022/internal/aoc/day22"
+	"github.com/frodejac/aoc-2022/internal/aoc/day23"
+	"github.com/frodejac/aoc-2022/internal/aoc/day24"
+)
+
 type AocSolver interface {
 	SolvePart1() string
 	SolvePart2() string
@@ -12,57 +40,56 @@ type Day struct {
 func GetAocSolver(day int, input []byte) AocSolver {
 	switch day {
 	case 0:
-		return &Day00{input: input}
+		return day00.Solver(input)
 	case 1:
-		return &Day01{input: input}
+		return day01.Solver(input)
 	case 2:
-		return &Day02{input: input}
+		return day02.Solver(input)
 	case 3:
-		return &Day03{input: input}
+		return day03.Solver(input)
 	case 4:
-		return &Day04{input: input}
+		return day04.Solver(input)
 	case 5:
-		return &Day05{input: input}
+		return day05.Solver(input)
 	case 6:
-		return &Day06{input: input}
+		return day06.Solver(input)
 	case 7:
-		return &Day07{input: input}
+		return day07.Solver(input)
 	case 8:
-		return &Day08{input: input}
+		return day08.Solver(input)
 	case 9:
-		return &Day09{input: input}
+		return day09.Solver(input)
 	case 10:
-		return &Day10{input: input}
+		return day10.Solver(input)
 	case 11:
-		return &Day11{input: input}
+		return day11.Solver(input)
 	case 12:
-		return &Day12{input: input}
+		return day12.Solver(input)
 	case 13:
-		return &Day13{input: input}
+		return day13.Solver(input)
 	case 14:
-		return &Day14{input: input}
+		return day14.Solver(input)
 	case 15:
-		return &Day15{input: input}
+		return day15.Solver(input)
 	case 16:
-		return &Day16{input: input}
+		return day16.Solver(input)
 	case 17:
-		return &Day17{input: input}
+		return day17.Solver(input)
 	case 18:
-		return &Day18{input: input}
+		return day18.Solver(input)
 	case 19:
-		return &Day19{input: input}
+		return day19.Solver(input)
 	case 20:
-		return &Day20{input: input}
+		return day20.Solver(input)
 	case 21:
-		return &Day21{input: input}
+		return day21.Solver(input)
 	case 22:
-		return &Day22{input: input}
+		return day22.Solver(input)
 	case 23:
-		return &Day23{input: input}
+		return day23.Solver(input)
 	case 24:
-		return &Day24{input: input}
+		return day24.Solver(input)
 	default:
 		panic("Day not implemented")
 	}
-
 }
