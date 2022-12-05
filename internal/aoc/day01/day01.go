@@ -6,11 +6,11 @@ import (
 )
 
 type Day01 struct {
-	input []byte
+	rounds []rpsRound
 }
 
 func Solver(input []byte) *Day01 {
-	return &Day01{input: input}
+	return &Day01{rounds: parseInput(string(input))}
 }
 
 type rpsRound struct {
@@ -39,7 +39,7 @@ var roundMod = map[int]int{
 	3: 0,
 }
 
-func parseDay01Input(input string) []rpsRound {
+func parseInput(input string) []rpsRound {
 	input = strings.TrimSpace(input)
 	lines := strings.Split(input, "\n")
 	rounds := make([]rpsRound, len(lines))
@@ -52,7 +52,7 @@ func parseDay01Input(input string) []rpsRound {
 
 func (d *Day01) SolvePart1() string {
 	total := 0
-	for _, r := range parseDay01Input(string(d.input)) {
+	for _, r := range d.rounds {
 		total += roundScore[(r.elf-r.player+3)%3] + r.player
 	}
 	return strconv.Itoa(total)
@@ -60,7 +60,7 @@ func (d *Day01) SolvePart1() string {
 
 func (d *Day01) SolvePart2() string {
 	total := 0
-	for _, r := range parseDay01Input(string(d.input)) {
+	for _, r := range d.rounds {
 		total += (r.elf+roundMod[r.player])%3 + 1 + (r.player-1)*3
 	}
 	return strconv.Itoa(total)

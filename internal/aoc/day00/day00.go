@@ -9,18 +9,18 @@ import (
 )
 
 type Day00 struct {
-	input []byte
+	elves []elf
 }
 
 func Solver(input []byte) *Day00 {
-	return &Day00{input: input}
+	return &Day00{elves: parseInput(string(input))}
 }
 
 type elf struct {
 	inventory []int
 }
 
-func parseDay00Input(input string) []elf {
+func parseInput(input string) []elf {
 	input = strings.TrimSpace(input)
 	inputs := strings.Split(input, "\n\n")
 	elves := make([]elf, len(inputs))
@@ -39,30 +39,26 @@ func parseDay00Input(input string) []elf {
 }
 
 func (d *Day00) SolvePart1() string {
-	elves := parseDay00Input(string(d.input))
-
-	inventories := make([]int, len(elves))
-	for i, elf := range elves {
-		inventories[i] = arraytools.Sum(elf.inventory)
+	max := 0
+	for _, elf := range d.elves {
+		sum := arraytools.Sum(elf.inventory)
+		if sum > max {
+			max = sum
+		}
 	}
-	max := arraytools.Max(inventories)
-
 	return strconv.Itoa(max)
 }
 
 func (d *Day00) SolvePart2() string {
-	elves := parseDay00Input(string(d.input))
-
-	inventories := make([]int, len(elves))
-	for i, elf := range elves {
-		inventories[i] = arraytools.Sum(elf.inventory)
+	invSizes := make([]int, len(d.elves))
+	for i, elf := range d.elves {
+		invSizes[i] = arraytools.Sum(elf.inventory)
 	}
-	sort.Slice(inventories[:], func(i, j int) bool {
-		return inventories[i] > inventories[j]
+	sort.Slice(invSizes[:], func(i, j int) bool {
+		return invSizes[i] > invSizes[j]
 	})
 
-	total := arraytools.Sum(inventories[:3])
+	total := arraytools.Sum(invSizes[:3])
 
 	return strconv.Itoa(total)
-
 }

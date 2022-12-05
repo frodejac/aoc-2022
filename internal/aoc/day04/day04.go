@@ -9,7 +9,8 @@ import (
 )
 
 type Day04 struct {
-	input []byte
+	cb    *cargoBay
+	moves []move
 }
 
 type cargoBay struct {
@@ -88,21 +89,20 @@ func parseInput(input string) (*cargoBay, []move) {
 }
 
 func Solver(input []byte) *Day04 {
-	return &Day04{input: input}
+	cb, moves := parseInput(string(input))
+	return &Day04{cb: cb, moves: moves}
 }
 
 func (d *Day04) SolvePart1() string {
-	cb, moves := parseInput(string(d.input))
-	for _, move := range moves {
-		cb.move9000(move.from, move.to, move.count)
+	for _, move := range d.moves {
+		d.cb.move9000(move.from, move.to, move.count)
 	}
-	return cb.toString()
+	return d.cb.toString()
 }
 
 func (d *Day04) SolvePart2() string {
-	cb, moves := parseInput(string(d.input))
-	for _, move := range moves {
-		cb.move9001(move.from, move.to, move.count)
+	for _, move := range d.moves {
+		d.cb.move9001(move.from, move.to, move.count)
 	}
-	return cb.toString()
+	return d.cb.toString()
 }
