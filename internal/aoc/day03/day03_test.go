@@ -22,14 +22,14 @@ func TestSolveDay03Part1(t *testing.T) {
 	const day, part = 3, 1
 	input, err := io.GetInput(day)
 	if err != nil {
-		t.Log("Failed to get input for day 03")
+		t.Logf("Failed to get input for day %02d, part %d", day, part)
 		t.Fail()
 	}
 	solver := Solver(input)
 	part1 := solver.SolvePart1()
 	expected, err := io.GetSolution(day, part)
 	if err != nil {
-		t.Log("Failed to get solution for day 03, part 1")
+		t.Logf("Failed to get solution for day %02d, part %d", day, part)
 		t.Fail()
 	}
 	if part1 != string(expected) {
@@ -42,14 +42,14 @@ func TestSolveDay03Part2(t *testing.T) {
 	const day, part = 3, 2
 	input, err := io.GetInput(day)
 	if err != nil {
-		t.Log("Failed to get input for day 03")
+		t.Logf("Failed to get input for day %02d, part %d", day, part)
 		t.Fail()
 	}
 	solver := Solver(input)
 	part2 := solver.SolvePart2()
 	expected, err := io.GetSolution(day, part)
 	if err != nil {
-		t.Log("Failed to get solution for day 03, part 2")
+		t.Logf("Failed to get solution for day %02d, part %d", day, part)
 		t.Fail()
 	}
 	if part2 != string(expected) {
