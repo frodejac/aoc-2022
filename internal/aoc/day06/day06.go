@@ -89,12 +89,12 @@ func sumSizesLessThanEqual(d *directory, size int) int {
 	return sum
 }
 
-func findSizeOfSmallestFileToDelete(d *directory, freeRequired int, minSize *int) {
+func findSizeOfSmallestDirectoryToDelete(d *directory, freeRequired int, minSize *int) {
 	if d.size >= freeRequired && d.size < *minSize {
 		*minSize = d.size
 	}
 	for _, c := range d.children {
-		findSizeOfSmallestFileToDelete(c, freeRequired, minSize)
+		findSizeOfSmallestDirectoryToDelete(c, freeRequired, minSize)
 	}
 }
 
@@ -111,8 +111,8 @@ func (d *Day06) SolvePart2() string {
 	unusedSpace := availableSpace - d.root.size
 	freeRequired := necessarySpace - unusedSpace
 
-	filesize := availableSpace
-	findSizeOfSmallestFileToDelete(d.root, freeRequired, &filesize)
+	dirsize := availableSpace
+	findSizeOfSmallestDirectoryToDelete(d.root, freeRequired, &dirsize)
 
-	return strconv.Itoa(filesize)
+	return strconv.Itoa(dirsize)
 }
