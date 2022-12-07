@@ -18,6 +18,14 @@ func TestMax(t *testing.T) {
 	}
 }
 
+func TestMin(t *testing.T) {
+	array := []int{1, 2, 3, 4, 5}
+	min := Min(array)
+	if min != 1 {
+		t.Errorf("Expected min to be 1, got %d", min)
+	}
+}
+
 func TestIntersect(t *testing.T) {
 	a := []int{1, 2, 3, 4, 5}
 	b := []int{3, 4, 5, 6, 7}
