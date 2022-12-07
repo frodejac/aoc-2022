@@ -21,13 +21,13 @@ type directory struct {
 	size     int
 }
 
-func (d *directory) recursiveCalcSizes() {
+func (d *directory) calcSize() {
 	size := 0
 	for _, f := range d.files {
 		size += f.size
 	}
 	for _, c := range d.children {
-		c.recursiveCalcSizes()
+		c.calcSize()
 		size += c.size
 	}
 	d.size = size
@@ -39,13 +39,13 @@ func parseInput(input string) *directory {
 	root := &directory{parent: nil, children: map[string]*directory{}, files: map[string]*file{}}
 	curdir := root
 	for _, line := range lines {
-		lineParts := strings.Split(line, " ")
-		switch lineParts[0] {
-		case "$": // command
-			switch lineParts[1] {
+		parts := strings.Split(line, " ")
+		switch parts[0] {
+		case "$":
+			cmd := parts[1]
+			switch cmd {
 			case "cd":
-				dir := lineParts[2]
-				// change directory
+				dir := parts[2]
 				switch dir {
 				case "..":
 					curdir = curdir.parent
@@ -55,26 +55,20 @@ func parseInput(input string) *directory {
 					curdir = curdir.children[dir]
 				}
 			case "ls":
-				// list directory, noop
 				continue
 			}
-		case "dir": // directory
-			{
-				dirname := lineParts[1]
-				dir := &directory{parent: curdir, children: map[string]*directory{}, files: map[string]*file{}}
-				curdir.children[dirname] = dir
-			}
-
-		default: // file
-			{
-				fsize, _ := strconv.Atoi(lineParts[0])
-				fname := lineParts[1]
-				file := &file{parent: curdir, size: fsize}
-				curdir.files[fname] = file
-			}
+		case "dir":
+			dirname := parts[1]
+			dir := &directory{parent: curdir, children: map[string]*directory{}, files: map[string]*file{}}
+			curdir.children[dirname] = dir
+		default:
+			fsize, _ := strconv.Atoi(parts[0])
+			fname := parts[1]
+			file := &file{parent: curdir, size: fsize}
+			curdir.files[fname] = file
 		}
 	}
-	root.recursiveCalcSizes()
+	root.calcSize()
 	return root
 }
 
