@@ -56,3 +56,7 @@ func (s *Stack[T]) Reverse() {
 		s.values[i], s.values[len(s.values)-1-i] = s.values[len(s.values)-1-i], s.values[i]
 	}
 }
+
+func (s *Stack[T]) Size() int {
+	return len(s.values)
+}
